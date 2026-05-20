@@ -29,7 +29,8 @@
     "activeTab",
     "tabs",
     "bookmarks",
-    "contextMenus"
+    "contextMenus",
+    "scripting"
   ],
   "host_permissions": [
     "<all_urls>",
