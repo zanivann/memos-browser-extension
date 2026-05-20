@@ -70,18 +70,11 @@ export function encodeContent(content: string) {
 }
 
 export async function executeScript(tabId: number, func: any, args: any[] = []) {
-  if (typeof chrome.scripting !== 'undefined') {
-    const results = await chrome.scripting.executeScript({
-      target: { tabId },
-      func,
-      args,
-    });
-    return results[0]?.result;
-  } else {
-    const results = await browser.tabs.executeScript(tabId, {
-      code: `(${func})(${args.map((arg) => JSON.stringify(arg)).join(',')})`,
-    });
-    return results[0];
-  }
+  const browserAPI = getBrowser();
+  const results = await browserAPI.scripting.executeScript({
+    target: { tabId },
+    func,
+    args,
+  });
+  return results[0]?.result;
 }
-
